@@ -1,0 +1,6 @@
+pics:
+    resource: Picta\Controller\PicsController
+    type:     rest
+app:
+    resource: "@Picta/Controller/DefaultController.php"
+    type:     annotation
