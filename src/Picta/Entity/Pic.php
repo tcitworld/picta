@@ -2,13 +2,17 @@
 
 namespace Picta\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 use JMS\Serializer\Annotation\Expose;
+use Symfony\Component\Validator\Constraints\Date;
 
 
 /**
  * Pic.
  *
+ * @ApiResource
  * @ORM\Entity
  * @ORM\Table(name="`pic`")
  */
@@ -44,14 +48,14 @@ class Pic
    */
   private $pictureAddress;
   /**
-    * @var date
+    * @var DateTime
     *
     * @ORM\Column(name="created_at", type="datetime")
     */
   private $createdAt;
 
   /**
-    * @var date
+    * @var DateTime
     *
     * @ORM\Column(name="updated_at", type="datetime")
     */
@@ -75,7 +79,7 @@ class Pic
     *
     * @return int
     */
-  public function getId()
+  public function getId(): int
   {
       return $this->id;
   }
@@ -85,7 +89,7 @@ class Pic
     *
     * @return string
     */
-  public function getTitle()
+  public function getTitle(): string
   {
       return $this->title;
   }
@@ -97,7 +101,7 @@ class Pic
     *
     * @return Pic
     */
-  public function setTitle($title)
+  public function setTitle($title): Pic
   {
       $this->title = $title;
 
@@ -109,7 +113,7 @@ class Pic
     *
     * @return string
     */
-  public function getDescription()
+  public function getDescription(): string
   {
       return $this->description;
   }
@@ -121,9 +125,9 @@ class Pic
     *
     * @return Pic
     */
-  public function setDescription($name)
+  public function setDescription(string $description): Pic
   {
-      $this->$description = $description;
+      $this->description = $description;
 
       return $this;
   }
@@ -133,7 +137,7 @@ class Pic
     *
     * @return string
     */
-   public function getPictureAddress()
+   public function getPictureAddress(): string
    {
        return $this->pictureAddress;
    }
@@ -145,7 +149,7 @@ class Pic
     *
     * @return Pic
     */
-  public function setPictureAddress($pictureAddress)
+  public function setPictureAddress(string $pictureAddress): Pic
     {
         $this->pictureAddress = $pictureAddress;
 
@@ -157,7 +161,7 @@ class Pic
     *
     * @return DateTime
     */
-  public function getCreatedAt()
+  public function getCreatedAt(): DateTime
   {
       return $this->createdAt;
   }
@@ -167,7 +171,7 @@ class Pic
     *
     * @return DateTime
     */
-   public function getUpdatedAt()
+   public function getUpdatedAt(): DateTime
    {
        return $this->updatedAt;
    }
@@ -179,9 +183,9 @@ class Pic
     public function timestamps()
     {
         if (is_null($this->createdAt)) {
-            $this->createdAt = new \DateTime();
+            $this->createdAt = new DateTime();
         }
 
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new DateTime();
     }
 }

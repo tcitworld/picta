@@ -2,14 +2,17 @@
 
 namespace Picta\Entity;
 
+use DateTime;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Picta\Entity\Pic;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * User.
+ *
+ * @ApiResource(attributes={"filters"={"user.name"}})
  * @ORM\Entity
  * @ORM\Table(name="`user`")
  */
@@ -32,14 +35,14 @@ class User extends BaseUser
     protected $name;
 
     /**
-     * @var date
+     * @var DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
 
     /**
-     * @var date
+     * @var DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
      */
@@ -64,10 +67,10 @@ class User extends BaseUser
     public function timestamps()
     {
         if (is_null($this->createdAt)) {
-            $this->createdAt = new \DateTime();
+            $this->createdAt = new DateTime();
         }
 
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new DateTime();
     }
 
     /**
@@ -77,7 +80,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setName($name)
+    public function setName(string $name): User
     {
         $this->name = $name;
 
@@ -89,7 +92,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -97,7 +100,7 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -105,7 +108,7 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -115,7 +118,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addPic(Pic $pic)
+    public function addPic(Pic $pic): User
     {
         $this->pics[] = $pic;
 
@@ -125,12 +128,12 @@ class User extends BaseUser
     /**
      * @return ArrayCollection<Pic>
      */
-    public function getPics()
+    public function getPics(): ArrayCollection
     {
         return $this->pics;
     }
 
-    public function isEqualTo(UserInterface $user)
+    public function isEqualTo(UserInterface $user): bool
     {
         return $this->username === $user->getUsername();
     }
